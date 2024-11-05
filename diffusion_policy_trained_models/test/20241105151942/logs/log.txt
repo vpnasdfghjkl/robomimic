@@ -1,524 +1,0 @@
-
-============= Initialized Observation Utils with Obs Spec =============
-
-using obs modality: low_dim with keys: ['robot0_eef_quat', 'object', 'robot0_gripper_qpos', 'robot0_eef_pos']
-using obs modality: rgb with keys: ['agentview_image', 'robot0_eye_in_hand_image']
-using obs modality: depth with keys: []
-using obs modality: scan with keys: []
-
-============= Loaded Environment Metadata =============
-obs key agentview_image with shape (84, 84, 3)
-obs key object with shape (14,)
-obs key robot0_eef_pos with shape (3,)
-obs key robot0_eef_quat with shape (4,)
-obs key robot0_eye_in_hand_image with shape (84, 84, 3)
-obs key robot0_gripper_qpos with shape (2,)
-WARNING: could not import mimicgen envs
-Created environment with name NutAssemblySquare
-Action size is 7
-FrameStackWrapper(
-    num_frames=2
-    env=NutAssemblySquare
-    {
-        "camera_depths": false,
-        "camera_heights": 84,
-        "camera_names": [
-            "agentview",
-            "robot0_eye_in_hand"
-        ],
-        "camera_widths": 84,
-        "control_freq": 20,
-        "controller_configs": {
-            "control_delta": true,
-            "damping": 1,
-            "damping_limits": [
-                0,
-                10
-            ],
-            "impedance_mode": "fixed",
-            "input_max": 1,
-            "input_min": -1,
-            "interpolation": null,
-            "kp": 150,
-            "kp_limits": [
-                0,
-                300
-            ],
-            "orientation_limits": null,
-            "output_max": [
-                0.05,
-                0.05,
-                0.05,
-                0.5,
-                0.5,
-                0.5
-            ],
-            "output_min": [
-                -0.05,
-                -0.05,
-                -0.05,
-                -0.5,
-                -0.5,
-                -0.5
-            ],
-            "position_limits": null,
-            "ramp_ratio": 0.2,
-            "type": "OSC_POSE",
-            "uncouple_pos_ori": true
-        },
-        "has_offscreen_renderer": true,
-        "has_renderer": false,
-        "ignore_done": true,
-        "render_gpu_device_id": 0,
-        "reward_shaping": false,
-        "robots": [
-            "Panda"
-        ],
-        "use_camera_obs": true,
-        "use_object_obs": true
-    }
-)
-
-/home/camille/miniconda3/envs/robomimic_venv/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
-  warnings.warn(
-/home/camille/miniconda3/envs/robomimic_venv/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
-  warnings.warn(msg)
-Welcome! Welcome to the LowDimCore
-Welcome! Welcome to the LowDimCore
-Welcome! Welcome to the LowDimCore
-Welcome! Welcome to the LowDimCore
-number of parameters: 7.622887e+07
-
-============= Model Summary =============
-DiffusionPolicyUNet (
-  ModuleDict(
-    (policy): ModuleDict(
-      (obs_encoder): ObservationGroupEncoder(
-          group=obs
-          ObservationEncoder(
-              Key(
-                  name=agentview_image
-                  shape=[3, 84, 84]
-                  modality=rgb
-                  randomizer=CropRandomizer(input_shape=[3, 84, 84], crop_size=[76, 76], num_crops=1)
-                  net=VisualCore(
-                    input_shape=[3, 76, 76]
-                    output_shape=[64]
-                    backbone_net=ResNet18Conv(input_channel=3, input_coord_conv=False)
-                    pool_net=SpatialSoftmax(num_kp=32, temperature=1.0, noise=0.0)
-                  )
-                  sharing_from=None
-              )
-              Key(
-                  name=object
-                  shape=[14]
-                  modality=low_dim
-                  randomizer=None
-                  net=LowDimCore(
-                    (low_dim_ec_net): Linear(in_features=14, out_features=64, bias=True)
-                  )
-                  sharing_from=None
-              )
-              Key(
-                  name=robot0_eef_pos
-                  shape=[3]
-                  modality=low_dim
-                  randomizer=None
-                  net=LowDimCore(
-                    (low_dim_ec_net): Linear(in_features=3, out_features=64, bias=True)
-                  )
-                  sharing_from=None
-              )
-              Key(
-                  name=robot0_eef_quat
-                  shape=[4]
-                  modality=low_dim
-                  randomizer=None
-                  net=LowDimCore(
-                    (low_dim_ec_net): Linear(in_features=4, out_features=64, bias=True)
-                  )
-                  sharing_from=None
-              )
-              Key(
-                  name=robot0_eye_in_hand_image
-                  shape=[3, 84, 84]
-                  modality=rgb
-                  randomizer=CropRandomizer(input_shape=[3, 84, 84], crop_size=[76, 76], num_crops=1)
-                  net=VisualCore(
-                    input_shape=[3, 76, 76]
-                    output_shape=[64]
-                    backbone_net=ResNet18Conv(input_channel=3, input_coord_conv=False)
-                    pool_net=SpatialSoftmax(num_kp=32, temperature=1.0, noise=0.0)
-                  )
-                  sharing_from=None
-              )
-              Key(
-                  name=robot0_gripper_qpos
-                  shape=[2]
-                  modality=low_dim
-                  randomizer=None
-                  net=LowDimCore(
-                    (low_dim_ec_net): Linear(in_features=2, out_features=64, bias=True)
-                  )
-                  sharing_from=None
-              )
-              output_shape=[384]
-          )
-      )
-      (noise_pred_net): ConditionalUnet1D(
-        (mid_modules): ModuleList(
-          (0-1): 2 x ConditionalResidualBlock1D(
-            (blocks): ModuleList(
-              (0-1): 2 x Conv1dBlock(
-                (block): Sequential(
-                  (0): Conv1d(1024, 1024, kernel_size=(5,), stride=(1,), padding=(2,))
-                  (1): GroupNorm(8, 1024, eps=1e-05, affine=True)
-                  (2): Mish()
-                )
-              )
-            )
-            (cond_encoder): Sequential(
-              (0): Mish()
-              (1): Linear(in_features=1024, out_features=2048, bias=True)
-              (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-            )
-            (residual_conv): Identity()
-          )
-        )
-        (diffusion_step_encoder): Sequential(
-          (0): SinusoidalPosEmb()
-          (1): Linear(in_features=256, out_features=1024, bias=True)
-          (2): Mish()
-          (3): Linear(in_features=1024, out_features=256, bias=True)
-        )
-        (up_modules): ModuleList(
-          (0): ModuleList(
-            (0): ConditionalResidualBlock1D(
-              (blocks): ModuleList(
-                (0): Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(2048, 512, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 512, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-                (1): Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 512, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-              )
-              (cond_encoder): Sequential(
-                (0): Mish()
-                (1): Linear(in_features=1024, out_features=1024, bias=True)
-                (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-              )
-              (residual_conv): Conv1d(2048, 512, kernel_size=(1,), stride=(1,))
-            )
-            (1): ConditionalResidualBlock1D(
-              (blocks): ModuleList(
-                (0-1): 2 x Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 512, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-              )
-              (cond_encoder): Sequential(
-                (0): Mish()
-                (1): Linear(in_features=1024, out_features=1024, bias=True)
-                (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-              )
-              (residual_conv): Identity()
-            )
-            (2): Upsample1d(
-              (conv): ConvTranspose1d(512, 512, kernel_size=(4,), stride=(2,), padding=(1,))
-            )
-          )
-          (1): ModuleList(
-            (0): ConditionalResidualBlock1D(
-              (blocks): ModuleList(
-                (0): Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(1024, 256, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 256, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-                (1): Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(256, 256, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 256, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-              )
-              (cond_encoder): Sequential(
-                (0): Mish()
-                (1): Linear(in_features=1024, out_features=512, bias=True)
-                (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-              )
-              (residual_conv): Conv1d(1024, 256, kernel_size=(1,), stride=(1,))
-            )
-            (1): ConditionalResidualBlock1D(
-              (blocks): ModuleList(
-                (0-1): 2 x Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(256, 256, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 256, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-              )
-              (cond_encoder): Sequential(
-                (0): Mish()
-                (1): Linear(in_features=1024, out_features=512, bias=True)
-                (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-              )
-              (residual_conv): Identity()
-            )
-            (2): Upsample1d(
-              (conv): ConvTranspose1d(256, 256, kernel_size=(4,), stride=(2,), padding=(1,))
-            )
-          )
-        )
-        (down_modules): ModuleList(
-          (0): ModuleList(
-            (0): ConditionalResidualBlock1D(
-              (blocks): ModuleList(
-                (0): Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(7, 256, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 256, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-                (1): Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(256, 256, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 256, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-              )
-              (cond_encoder): Sequential(
-                (0): Mish()
-                (1): Linear(in_features=1024, out_features=512, bias=True)
-                (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-              )
-              (residual_conv): Conv1d(7, 256, kernel_size=(1,), stride=(1,))
-            )
-            (1): ConditionalResidualBlock1D(
-              (blocks): ModuleList(
-                (0-1): 2 x Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(256, 256, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 256, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-              )
-              (cond_encoder): Sequential(
-                (0): Mish()
-                (1): Linear(in_features=1024, out_features=512, bias=True)
-                (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-              )
-              (residual_conv): Identity()
-            )
-            (2): Downsample1d(
-              (conv): Conv1d(256, 256, kernel_size=(3,), stride=(2,), padding=(1,))
-            )
-          )
-          (1): ModuleList(
-            (0): ConditionalResidualBlock1D(
-              (blocks): ModuleList(
-                (0): Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(256, 512, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 512, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-                (1): Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 512, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-              )
-              (cond_encoder): Sequential(
-                (0): Mish()
-                (1): Linear(in_features=1024, out_features=1024, bias=True)
-                (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-              )
-              (residual_conv): Conv1d(256, 512, kernel_size=(1,), stride=(1,))
-            )
-            (1): ConditionalResidualBlock1D(
-              (blocks): ModuleList(
-                (0-1): 2 x Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 512, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-              )
-              (cond_encoder): Sequential(
-                (0): Mish()
-                (1): Linear(in_features=1024, out_features=1024, bias=True)
-                (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-              )
-              (residual_conv): Identity()
-            )
-            (2): Downsample1d(
-              (conv): Conv1d(512, 512, kernel_size=(3,), stride=(2,), padding=(1,))
-            )
-          )
-          (2): ModuleList(
-            (0): ConditionalResidualBlock1D(
-              (blocks): ModuleList(
-                (0): Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(512, 1024, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 1024, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-                (1): Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(1024, 1024, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 1024, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-              )
-              (cond_encoder): Sequential(
-                (0): Mish()
-                (1): Linear(in_features=1024, out_features=2048, bias=True)
-                (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-              )
-              (residual_conv): Conv1d(512, 1024, kernel_size=(1,), stride=(1,))
-            )
-            (1): ConditionalResidualBlock1D(
-              (blocks): ModuleList(
-                (0-1): 2 x Conv1dBlock(
-                  (block): Sequential(
-                    (0): Conv1d(1024, 1024, kernel_size=(5,), stride=(1,), padding=(2,))
-                    (1): GroupNorm(8, 1024, eps=1e-05, affine=True)
-                    (2): Mish()
-                  )
-                )
-              )
-              (cond_encoder): Sequential(
-                (0): Mish()
-                (1): Linear(in_features=1024, out_features=2048, bias=True)
-                (2): Unflatten(dim=-1, unflattened_size=(-1, 1))
-              )
-              (residual_conv): Identity()
-            )
-            (2): Identity()
-          )
-        )
-        (final_conv): Sequential(
-          (0): Conv1dBlock(
-            (block): Sequential(
-              (0): Conv1d(256, 256, kernel_size=(5,), stride=(1,), padding=(2,))
-              (1): GroupNorm(8, 256, eps=1e-05, affine=True)
-              (2): Mish()
-            )
-          )
-          (1): Conv1d(256, 7, kernel_size=(1,), stride=(1,))
-        )
-      )
-    )
-  )
-)
-
-SequenceDataset: loading dataset into memory...
-  0%|                                                                                                                                               | 0/200 [00:00<?, ?it/s] 56%|##########################################################################                                                         | 113/200 [00:00<00:00, 1128.32it/s]100%|###################################################################################################################################| 200/200 [00:00<00:00, 1108.33it/s]
-
-============= Training Dataset =============
-SequenceDataset (
-	path=/home/camille/sim/robomimic/datasets/square/ph/image_square.hdf5
-	obs_keys=('agentview_image', 'object', 'robot0_eef_pos', 'robot0_eef_quat', 'robot0_eye_in_hand_image', 'robot0_gripper_qpos')
-	seq_length=15
-	filter_key=none
-	frame_stack=2
-	pad_seq_length=True
-	pad_frame_stack=True
-	goal_mode=none
-	cache_mode=low_dim
-	num_demos=200
-	num_sequences=30154
-)
-
-SequenceDataset: normalizing actions...
-  0%|                                                                                                                                               | 0/199 [00:00<?, ?it/s]100%|###################################################################################################################################| 199/199 [00:00<00:00, 4218.09it/s]
-**************************************************
-Warnings generated by robomimic have been duplicated here (from above) for convenience. Please check them carefully.
-[33mROBOMIMIC WARNING(
-    No private macro file found!
-    It is recommended to use a private macro file
-    To setup, run: python /home/camille/sim/robomimic/robomimic/scripts/setup_macros.py
-)[0m
-**************************************************
-
-  0%|                                                                                                                                               | 0/117 [00:00<?, ?it/s]Backend TkAgg is interactive backend. Turning interactive mode on.
-  1%|#1                                                                                                                                     | 1/117 [00:17<33:13, 17.18s/it]  2%|##3                                                                                                                                    | 2/117 [00:23<20:51, 10.88s/it]  3%|###4                                                                                                                                   | 3/117 [00:27<14:19,  7.54s/it]  3%|####6                                                                                                                                  | 4/117 [00:28<09:12,  4.89s/it]  4%|#####7                                                                                                                                 | 5/117 [00:28<06:23,  3.42s/it]  5%|######9                                                                                                                                | 6/117 [00:29<04:40,  2.53s/it]  6%|########                                                                                                                               | 7/117 [00:30<03:35,  1.96s/it]  7%|#########2                                                                                                                             | 8/117 [00:31<02:53,  1.59s/it]  8%|##########3                                                                                                                            | 9/117 [00:31<02:23,  1.33s/it]  9%|###########4                                                                                                                          | 10/117 [00:32<02:02,  1.15s/it]  9%|############5                                                                                                                         | 11/117 [00:33<01:48,  1.02s/it] 10%|#############7                                                                                                                        | 12/117 [00:34<01:37,  1.07it/s] 11%|##############8                                                                                                                       | 13/117 [00:35<01:33,  1.11it/s] 12%|################                                                                                                                      | 14/117 [00:35<01:27,  1.18it/s] 13%|#################1                                                                                                                    | 15/117 [00:36<01:22,  1.24it/s] 14%|##################3                                                                                                                   | 16/117 [00:37<01:19,  1.28it/s] 15%|###################4                                                                                                                  | 17/117 [00:37<01:15,  1.32it/s] 15%|####################6                                                                                                                 | 18/117 [00:38<01:13,  1.35it/s] 16%|#####################7                                                                                                                | 19/117 [00:39<01:11,  1.37it/s] 17%|######################9                                                                                                               | 20/117 [00:40<01:12,  1.35it/s] 18%|########################                                                                                                              | 21/117 [00:40<01:11,  1.34it/s] 19%|#########################1                                                                                                            | 22/117 [00:41<01:09,  1.37it/s] 20%|##########################3                                                                                                           | 23/117 [00:42<01:07,  1.39it/s] 21%|###########################4                                                                                                          | 24/117 [00:42<01:06,  1.40it/s] 21%|############################6                                                                                                         | 25/117 [00:43<01:05,  1.41it/s] 22%|#############################7                                                                                                        | 26/117 [00:44<01:03,  1.43it/s] 23%|##############################9                                                                                                       | 27/117 [00:44<01:03,  1.43it/s] 24%|################################                                                                                                      | 28/117 [00:45<01:02,  1.42it/s] 25%|#################################2                                                                                                    | 29/117 [00:46<01:02,  1.40it/s] 26%|##################################3                                                                                                   | 30/117 [00:47<01:02,  1.39it/s] 26%|###################################5                                                                                                  | 31/117 [00:47<01:01,  1.40it/s] 27%|####################################6                                                                                                 | 32/117 [00:48<01:00,  1.41it/s] 28%|#####################################7                                                                                                | 33/117 [00:49<00:58,  1.43it/s] 29%|######################################9                                                                                               | 34/117 [00:49<00:57,  1.44it/s] 30%|########################################                                                                                              | 35/117 [00:50<00:57,  1.44it/s] 31%|#########################################2                                                                                            | 36/117 [00:51<00:56,  1.44it/s] 32%|##########################################3                                                                                           | 37/117 [00:52<00:55,  1.44it/s] 32%|###########################################5                                                                                          | 38/117 [00:52<00:54,  1.44it/s] 33%|############################################6                                                                                         | 39/117 [00:53<00:54,  1.44it/s] 34%|#############################################8                                                                                        | 40/117 [00:54<00:53,  1.44it/s] 35%|##############################################9                                                                                       | 41/117 [00:54<00:52,  1.44it/s] 36%|################################################1                                                                                     | 42/117 [00:55<00:51,  1.44it/s] 37%|#################################################2                                                                                    | 43/117 [00:56<00:50,  1.45it/s] 38%|##################################################3                                                                                   | 44/117 [00:56<00:50,  1.46it/s] 38%|###################################################5                                                                                  | 45/117 [00:57<00:49,  1.45it/s] 39%|####################################################6                                                                                 | 46/117 [00:58<00:48,  1.45it/s] 40%|#####################################################8                                                                                | 47/117 [00:58<00:48,  1.45it/s] 41%|######################################################9                                                                               | 48/117 [00:59<00:47,  1.45it/s] 42%|########################################################1                                                                             | 49/117 [01:00<00:46,  1.46it/s] 43%|#########################################################2                                                                            | 50/117 [01:00<00:46,  1.45it/s] 44%|##########################################################4                                                                           | 51/117 [01:01<00:45,  1.46it/s] 44%|###########################################################5                                                                          | 52/117 [01:02<00:44,  1.45it/s] 45%|############################################################7                                                                         | 53/117 [01:03<00:44,  1.45it/s] 46%|#############################################################8                                                                        | 54/117 [01:03<00:43,  1.46it/s] 47%|##############################################################9                                                                       | 55/117 [01:04<00:42,  1.46it/s] 48%|################################################################1                                                                     | 56/117 [01:05<00:41,  1.46it/s] 49%|#################################################################2                                                                    | 57/117 [01:05<00:41,  1.45it/s] 50%|##################################################################4                                                                   | 58/117 [01:06<00:40,  1.46it/s] 50%|###################################################################5                                                                  | 59/117 [01:07<00:39,  1.45it/s] 50%|###################################################################5                                                                  | 59/117 [01:07<01:06,  1.14s/it]
-Traceback (most recent call last):
-  File "/home/camille/miniconda3/envs/robomimic_venv/lib/python3.8/runpy.py", line 194, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/home/camille/miniconda3/envs/robomimic_venv/lib/python3.8/runpy.py", line 87, in _run_code
-    exec(code, run_globals)
-  File "/home/camille/.vscode/extensions/ms-python.debugpy-2024.12.0-linux-x64/bundled/libs/debugpy/adapter/../../debugpy/launcher/../../debugpy/__main__.py", line 71, in <module>
-    cli.main()
-  File "/home/camille/.vscode/extensions/ms-python.debugpy-2024.12.0-linux-x64/bundled/libs/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 501, in main
-    run()
-  File "/home/camille/.vscode/extensions/ms-python.debugpy-2024.12.0-linux-x64/bundled/libs/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 351, in run_file
-    runpy.run_path(target, run_name="__main__")
-  File "/home/camille/.vscode/extensions/ms-python.debugpy-2024.12.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 310, in run_path
-    return _run_module_code(code, init_globals, run_name, pkg_name=pkg_name, script_name=fname)
-  File "/home/camille/.vscode/extensions/ms-python.debugpy-2024.12.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 127, in _run_module_code
-    _run_code(code, mod_globals, init_globals, mod_name, mod_spec, pkg_name, script_name)
-  File "/home/camille/.vscode/extensions/ms-python.debugpy-2024.12.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 118, in _run_code
-    exec(code, run_globals)
-  File "/home/camille/sim/robomimic/robomimic/scripts/train.py", line 596, in <module>
-    main(args)
-  File "/home/camille/sim/robomimic/robomimic/scripts/train.py", line 511, in main
-    important_stats = train(config, device=device, auto_remove_exp=args.auto_remove_exp)
-  File "/home/camille/sim/robomimic/robomimic/scripts/train.py", line 222, in train
-    step_log = TrainUtils.run_epoch(
-  File "/home/camille/sim/robomimic/robomimic/utils/train_utils.py", line 668, in run_epoch
-    batch = next(data_loader_iter)
-  File "/home/camille/miniconda3/envs/robomimic_venv/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 630, in __next__
-    data = self._next_data()
-  File "/home/camille/miniconda3/envs/robomimic_venv/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 673, in _next_data
-    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
-  File "/home/camille/miniconda3/envs/robomimic_venv/lib/python3.8/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
-    data = [self.dataset[idx] for idx in possibly_batched_index]
-  File "/home/camille/miniconda3/envs/robomimic_venv/lib/python3.8/site-packages/torch/utils/data/_utils/fetch.py", line 52, in <listcomp>
-    data = [self.dataset[idx] for idx in possibly_batched_index]
-  File "/home/camille/sim/robomimic/robomimic/utils/dataset.py", line 427, in __getitem__
-    return self.get_item(index)
-  File "/home/camille/sim/robomimic/robomimic/utils/dataset.py", line 459, in get_item
-    meta["obs"] = self.get_obs_sequence_from_demo(
-  File "/home/camille/sim/robomimic/robomimic/utils/dataset.py", line 571, in get_obs_sequence_from_demo
-    obs, pad_mask = self.get_sequence_from_demo(
-  File "/home/camille/sim/robomimic/robomimic/utils/dataset.py", line 550, in get_sequence_from_demo
-    seq = TensorUtils.pad_sequence(seq, padding=(seq_begin_pad, seq_end_pad), pad_same=True)
-  File "/home/camille/sim/robomimic/robomimic/utils/tensor_utils.py", line 843, in pad_sequence
-    return recursive_dict_list_tuple_apply(
-  File "/home/camille/sim/robomimic/robomimic/utils/tensor_utils.py", line 32, in recursive_dict_list_tuple_apply
-    new_x[k] = recursive_dict_list_tuple_apply(v, type_func_dict, error_on_missing_type)
-  File "/home/camille/sim/robomimic/robomimic/utils/tensor_utils.py", line 42, in recursive_dict_list_tuple_apply
-    return f(x)
-  File "/home/camille/sim/robomimic/robomimic/utils/tensor_utils.py", line 849, in <lambda>
-    pad_sequence_single(x, p, b, ps, pv),
-  File "/home/camille/sim/robomimic/robomimic/utils/tensor_utils.py", line 825, in pad_sequence_single
-    return concat_func(begin_pad + [seq] + end_pad, seq_dim)
-  File "<__array_function__ internals>", line 200, in concatenate
-KeyboardInterrupt
