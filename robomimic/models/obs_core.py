@@ -166,7 +166,7 @@ class VisualCore(EncoderCore, BaseNets.ConvBase):
         """
         ndim = len(self.input_shape)
         assert tuple(inputs.shape)[-ndim:] == tuple(self.input_shape)
-        return super(VisualCore, self).forward(inputs)
+        return super(VisualCore, self).forward(inputs)  # (B*T, C, H, W)
 
     def __repr__(self):
         """Pretty print network."""
@@ -181,6 +181,32 @@ class VisualCore(EncoderCore, BaseNets.ConvBase):
         return msg
 
 
+"""
+================================================
+Low_dim Core Networks (Backbone + Pool)
+================================================
+"""
+class LowDimCore(EncoderCore):
+    def __init__(self, 
+                 input_shape, 
+                 feature_dimension=64,
+                 welcome_str="welcome to the low dim core",):
+        super().__init__(input_shape=input_shape)
+        print(f"Welcome! {welcome_str}")
+        self.device = 'cuda' if torch.cuda.is_available() else "cpu"  
+        self.low_dim_ec_net = nn.Linear(input_shape[-1], feature_dimension).to(torch.device(self.device))
+        self.feature_dimension = feature_dimension
+        
+    def output_shape(self, input_shape=None):
+        output_shape = input_shape[:-1]+ [self.feature_dimension]
+        return output_shape
+    
+    def forward(self, inputs):
+        bt,d = inputs.shape
+        low_dim_features = self.low_dim_ec_net(inputs)
+        return low_dim_features
+        
+    
 """
 ================================================
 Scan Core Networks (Conv1D Sequential + Pool)

@@ -1,0 +1,81 @@
+
+============= Initialized Observation Utils with Obs Spec =============
+
+using obs modality: low_dim with keys: ['robot0_eef_pos', 'robot0_gripper_qpos', 'object', 'robot0_eef_quat']
+using obs modality: rgb with keys: ['agentview_image', 'robot0_eye_in_hand_image']
+using obs modality: depth with keys: []
+using obs modality: scan with keys: []
+
+============= Loaded Environment Metadata =============
+obs key agentview_image with shape (84, 84, 3)
+obs key object with shape (14,)
+obs key robot0_eef_pos with shape (3,)
+obs key robot0_eef_quat with shape (4,)
+obs key robot0_eye_in_hand_image with shape (84, 84, 3)
+obs key robot0_gripper_qpos with shape (2,)
+WARNING: could not import mimicgen envs
+Created environment with name NutAssemblySquare
+Action size is 7
+FrameStackWrapper(
+    num_frames=2
+    env=NutAssemblySquare
+    {
+        "camera_depths": false,
+        "camera_heights": 84,
+        "camera_names": [
+            "agentview",
+            "robot0_eye_in_hand"
+        ],
+        "camera_widths": 84,
+        "control_freq": 20,
+        "controller_configs": {
+            "control_delta": true,
+            "damping": 1,
+            "damping_limits": [
+                0,
+                10
+            ],
+            "impedance_mode": "fixed",
+            "input_max": 1,
+            "input_min": -1,
+            "interpolation": null,
+            "kp": 150,
+            "kp_limits": [
+                0,
+                300
+            ],
+            "orientation_limits": null,
+            "output_max": [
+                0.05,
+                0.05,
+                0.05,
+                0.5,
+                0.5,
+                0.5
+            ],
+            "output_min": [
+                -0.05,
+                -0.05,
+                -0.05,
+                -0.5,
+                -0.5,
+                -0.5
+            ],
+            "position_limits": null,
+            "ramp_ratio": 0.2,
+            "type": "OSC_POSE",
+            "uncouple_pos_ori": true
+        },
+        "has_offscreen_renderer": true,
+        "has_renderer": false,
+        "ignore_done": true,
+        "render_gpu_device_id": 0,
+        "reward_shaping": false,
+        "robots": [
+            "Panda"
+        ],
+        "use_camera_obs": true,
+        "use_object_obs": true
+    }
+)
+

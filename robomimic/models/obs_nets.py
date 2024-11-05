@@ -232,7 +232,7 @@ class ObservationEncoder(Module):
                 x = self.obs_randomizers[k].forward_in(x)
             # maybe process with obs net
             if self.obs_nets[k] is not None:
-                x = self.obs_nets[k](x)
+                x = self.obs_nets[k](x) # (B*T, C, H, W) -> (B*T, 64)
                 if self.activation is not None:
                     x = self.activation(x)
             # maybe process encoder output with randomizer
