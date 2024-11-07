@@ -241,7 +241,7 @@ class ObservationEncoder(Module):
             # flatten to [B, D]
             x = TensorUtils.flatten(x, begin_axis=1)
             feats.append(x)
-
+        
         # concatenate all features together
         return torch.cat(feats, dim=-1)
 

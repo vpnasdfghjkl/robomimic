@@ -94,7 +94,24 @@ def train(config, device, auto_remove_exp=False):
         ds_format=ds_format,
         verbose=True
     )
+    
 
+    import copy
+    new_shape_meta = copy.deepcopy(shape_meta)
+    del new_shape_meta["all_shapes"]["robot0_eef_pos"], \
+        new_shape_meta["all_shapes"]["robot0_eef_quat"], \
+        new_shape_meta["all_shapes"]["robot0_gripper_qpos"], \
+        new_shape_meta["all_shapes"]["object"]
+
+    new_shape_meta["all_obs_keys"].remove("robot0_eef_pos")
+    new_shape_meta["all_obs_keys"].remove("robot0_eef_quat")
+    new_shape_meta["all_obs_keys"].remove("robot0_gripper_qpos")
+    new_shape_meta["all_obs_keys"].remove("object")
+
+    new_shape_meta["all_shapes"]["state"] = [128]
+    new_shape_meta["all_obs_keys"].append("state")        
+    
+    
     if config.experiment.env is not None:
         env_meta["env_name"] = config.experiment.env
         print("=" * 30 + "\n" + "Replacing Env to {}\n".format(env_meta["env_name"]) + "=" * 30)
@@ -134,7 +151,7 @@ def train(config, device, auto_remove_exp=False):
     model = algo_factory(
         algo_name=config.algo_name,
         config=config,
-        obs_key_shapes=shape_meta["all_shapes"],
+        obs_key_shapes=new_shape_meta["all_shapes"],
         ac_dim=shape_meta["ac_dim"],
         device=device,
     )
