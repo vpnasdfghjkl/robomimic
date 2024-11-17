@@ -675,8 +675,8 @@ def run_epoch(model, data_loader, epoch, validate=False, num_steps=None, obs_nor
 
         # process batch for training
         t = time.time()
-        input_batch = model.process_batch_for_training(batch)
-        input_batch = model.postprocess_batch_for_training(input_batch, obs_normalization_stats=obs_normalization_stats)
+        input_batch = model.process_batch_for_training(batch)   # to dict
+        input_batch = model.postprocess_batch_for_training(input_batch, obs_normalization_stats=obs_normalization_stats)    #hwc to chw, normalize, to tensor
         timing_stats["Process_Batch"].append(time.time() - t)
 
         # forward and backward pass

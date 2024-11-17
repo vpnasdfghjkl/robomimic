@@ -103,7 +103,7 @@ class VisualCore(EncoderCore, BaseNets.ConvBase):
         assert isinstance(self.backbone, BaseNets.ConvBase)
 
         feat_shape = self.backbone.output_shape(input_shape)
-        net_list = [self.backbone]
+        net_list = [self.backbone]  # (B*T, outchannel:512, 3, 3)
 
         # maybe make pool net
         if pool_class is not None:

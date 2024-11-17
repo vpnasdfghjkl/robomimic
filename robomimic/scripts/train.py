@@ -156,6 +156,7 @@ def train(config, device, auto_remove_exp=False):
         device=device,
     )
     
+    print("test git")
     # save the config as a json file
     with open(os.path.join(log_dir, '..', 'config.json'), 'w') as outfile:
         json.dump(config, outfile, indent=4)
